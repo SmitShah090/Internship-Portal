@@ -1,0 +1,24 @@
+{
+  "name": "internship-portal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server" : "nodemon Backend/index.js",
+    "client" : "npm start --prefix Frontend",
+    "dev" : "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SmitShah090/Internship_portal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SmitShah090/Internship_portal/issues"
+  },
+  "homepage": "https://github.com/SmitShah090/Internship_portal#readme",
+  "dependencies": {
+    "concurrently": "^6.0.0"
+  }
+}
