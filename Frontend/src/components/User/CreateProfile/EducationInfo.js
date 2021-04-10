@@ -15,6 +15,13 @@ const EducationInfo = ({university, setUniversity, edescription, setEdescription
 
   const classes = useStyles();
 
+  const addIcon = () => {
+    console.log({university : ""})
+    console.log({ university: {...{university}, university : ""}})
+    //setUniversity({university: ""})
+    // setEdescription([...edescription])
+  }
+
   return (
     <Paper id="education">
       <Container>
@@ -23,7 +30,7 @@ const EducationInfo = ({university, setUniversity, edescription, setEdescription
             <Typography variant="h6">Education</Typography>
           </Grid>
           <Grid item lg={1}>
-           <Button ><AddIcon /></Button> 
+           <Button ><AddIcon onClick={() => addIcon()} /></Button> 
           </Grid>
         </Grid>
         <Grid container spacing={2}>
@@ -34,7 +41,7 @@ const EducationInfo = ({university, setUniversity, edescription, setEdescription
                 onChange={(e) => setUniversity(e.target.value)}
                 fullWidth
                 placeholder="University Name*"
-              /> {loading && <CircularProgress />}
+              /> {loading && <CircularProgress variant="static" />}
             </Typography>
           </Grid>
           <Grid item lg={12} xl={12}>

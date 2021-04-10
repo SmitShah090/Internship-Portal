@@ -15,6 +15,7 @@ const Profile = ({ history }) => {
   const [name, setName] = useState("")
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
+  const [photo, setPhoto] = useState("")
 
   const [skills, setSkills] = useState([])
 
@@ -52,6 +53,9 @@ const Profile = ({ history }) => {
     Profile.name !== undefined ?  setName(Profile.name) : history.push("/create-profile")
     Profile.title !== undefined ?  setTitle(Profile.title) : history.push("/create-profile")
     Profile.description !== undefined ?  setDescription(Profile.description) : history.push("/create-profile")
+    Profile.photo !== undefined ?  setPhoto(Profile.photo) : history.push("/create-profile")
+
+    Profile.skills !== undefined ? setSkills(Profile.skills) : history.push("/create-profile")
 
     Profile.basicInfo !== undefined ?  setAge(Profile.basicInfo.age) : history.push("/create-profile")
     Profile.basicInfo !== undefined ?  setCtc(Profile.basicInfo.ctc) : history.push("/create-profile")
@@ -87,7 +91,8 @@ const Profile = ({ history }) => {
               name={name}
               title={title}
                description={description} 
-                //photo={profile.photo}
+                photo={photo}
+                skills={skills}
               />
             </Paper>
           </Grid>

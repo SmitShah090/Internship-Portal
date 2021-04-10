@@ -86,7 +86,7 @@ const postJob = async(req, res) => {
   const {jobInfo} = req.body
   try {
     const newJob = await new Job({
-      jobInfo
+      ...jobInfo
     })
     const savedjob = await newJob.save()
     
@@ -101,13 +101,13 @@ const postJob = async(req, res) => {
 // Update Employee Profile
 const employeeProfileUpdate = async(req, res) => {
 
-  const {profileInfo} = req.body
+  const {companyInfo} = req.body
 
   try {
     const updatedProfileInfo = await Employee.findByIdAndUpdate(req.params.id, {
       $set: {
         ...Employee,
-        profileInfo
+        companyInfo
       }
     })
 

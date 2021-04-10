@@ -3,6 +3,15 @@ import React from "react";
 import useStyles from "../../../styles/User/ProfileForm";
 
 const Skills = ({ skills, setSkills }) => {
+  const skillsList = [
+    "JavaScript",
+    "React Js",
+    "Node Js",
+    "React Native",
+    "Python",
+    "Mobile App Development",
+    "UI/UX Designing",
+  ];
   const classes = useStyles();
 
   return (
@@ -12,36 +21,23 @@ const Skills = ({ skills, setSkills }) => {
           <Typography variant="h6">Skills</Typography>
           <Grid item>
             <Grid container spacing={1} direction="row">
-              <Grid item>
-                <Typography className={classes.skill}>
-                  <Button onClick={(e) => setSkills(e.target.value)}>JavaScript</Button>
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography className={classes.skill}>
-                  <Button onClick={(e) => setSkills(e.target.value)}>Python</Button>
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography className={classes.skill}>
-                  <Button onClick={(e) => setSkills(e.target.value)}>Flutter</Button>
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography className={classes.skill}>
-                  <Button onClick={(e) => setSkills(e.target.value)}>Backend</Button>
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography className={classes.skill}>
-                  <Button onClick={(e) => setSkills(e.target.value)}>Mobile App Design App</Button>
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography className={classes.skill}>
-                  <Button onClick={(e) => setSkills(e.target.value)}>Adobe XD</Button>
-                </Typography>
-              </Grid>
+              {skillsList.map((skill, index) => (
+                <Grid item key={index}>
+                  <Typography className={classes.skill}>
+                    <Button
+                      onClick={(e) => {
+                        let user = {
+                          skills: skill,
+                        };
+                        const skillList = skills.concat(user.skills);
+                        setSkills(skillList);
+                      }}
+                    >
+                      {skill}
+                    </Button>
+                  </Typography>
+                </Grid>
+              ))}
             </Grid>
           </Grid>
         </Container>

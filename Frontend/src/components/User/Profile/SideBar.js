@@ -8,7 +8,7 @@ import {
 import React from "react";
 import useStyles from "../../../styles/User/Profile";
 
-const SideBar = ({ name, title, description, loading }) => {
+const SideBar = ({ name, title, description, loading, skills, photo }) => {
   const classes = useStyles();
   return (
     <div>
@@ -24,7 +24,7 @@ const SideBar = ({ name, title, description, loading }) => {
             <Grid container justify="center" alignItems="center" spacing={3}>
               {loading && <CircularProgress />}
               <Grid item lg={12}>
-                <Avatar alt="Remy Sharp" className={classes.icon} />
+                <Avatar alt="zemy harp" src={photo} className={classes.icon} />
               </Grid>
               <Grid item lg={12}>
                 <Typography className={classes.name} variant="h6">
@@ -60,25 +60,11 @@ const SideBar = ({ name, title, description, loading }) => {
           </Grid>
           <Grid item>
             <Grid container spacing={1} direction="row">
-              <Grid item lg={6} xs={4}>
-                <Typography className={classes.skill}>JavaScript</Typography>
-              </Grid>
-              <Grid item lg={6} xs={4}>
-                <Typography className={classes.skill}>Frontend</Typography>
-              </Grid>
-              <Grid item lg={6} xs={4}>
-                <Typography className={classes.skill}>Flutter</Typography>
-              </Grid>
-
-              <Grid item lg={6} xs={4}>
-                <Typography className={classes.skill}>Backend</Typography>
-              </Grid>
-              <Grid item lg={6} xs={4}>
-                <Typography className={classes.skill}>Mobile App</Typography>
-              </Grid>
-              <Grid item lg={6} xs={4}>
-                <Typography className={classes.skill}>Adobe XD</Typography>
-              </Grid>
+              {skills.map((skill, index) => (
+                <Grid item lg={6} xs={4} key={index}>
+                  <Typography className={classes.skill}>{skill}</Typography>
+                </Grid>
+              ))}
             </Grid>
           </Grid>
         </Grid>

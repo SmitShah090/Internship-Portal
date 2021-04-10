@@ -26,6 +26,16 @@ const useStyles = makeStyles(theme => ({
       marginTop: 15,
       marginRight: 5,
     },
+    skill: {
+      color: theme.palette.secondary.main,
+      padding: 5,
+      margin: 5,
+      border: "1px solid rgba(0, 176, 116, 0.1) ",
+      borderRadius: 15,
+      backgroundColor: "rgba(0, 176, 116, 0.2)",
+      textAlign: "center",
+      textDecoration: "none"
+    },
   }));
 
   export default useStyles

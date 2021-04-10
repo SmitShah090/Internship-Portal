@@ -74,7 +74,7 @@ const Internship = () => {
             {/* Internship Card (Job Details) */}
             {jobs.map((job) => (
               <Grid item lg={12}>
-                <InternshipCard job={job.jobInfo} />
+                <InternshipCard job={job} />
               </Grid>
             ))}
 

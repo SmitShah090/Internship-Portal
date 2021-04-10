@@ -12,7 +12,7 @@ const EmployeeSchema = new Schema({
     passwordHash: {
         type: String
     },
-    profileInfo: {
+    companyInfo: {
         companyName: {
             type: String
         },

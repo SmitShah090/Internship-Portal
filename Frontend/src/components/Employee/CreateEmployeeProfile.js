@@ -65,7 +65,7 @@ const CreateEmployeeProfile = ({history}) => {
          profileInfo : companyLocation,
          profileInfo : companyURL,
          profileInfo : companyDescription */
-        profileInfo: {
+        companyInfo: {
           companyName,
           companyLocation,
           companyURL,

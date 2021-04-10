@@ -3,29 +3,30 @@ const Schema = mongoose.Schema;
 
 const jobSchema = new Schema(
   {
-    jobInfo: {
-      jobTitle: {
-        type: String,
-      },
-      jobType: {
-        type: String,
-      },
-      companyName: {
-        type: String,
-      },
-      companyUrl: {
-        type: String,
-      },
-      workType: {
-        type: String,
-      },
-      payScale: {
-        type: String,
-      },
-      jobDescription: {
-        type: String,
-      },
+    jobTitle: {
+      type: String,
     },
+    jobType: {
+      type: String,
+    },
+    companyName: {
+      type: String,
+    },
+    companyUrl: {
+      type: String,
+    },
+    workType: {
+      type: String,
+    },
+    payScale: {
+      type: String,
+    },
+    jobDescription: {
+      type: String,
+    },
+    skills: [{
+      type: String
+    }]
   },
   {
     timestamps: true,

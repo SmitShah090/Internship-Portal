@@ -20,13 +20,31 @@ import { Close as CloseIcon } from "@material-ui/icons";
 import Axios from "axios";
 import EmployeeProfile from "./CreateEmployeeProfile";
 import EmployeeHeader from "./EmployeeHeader";
+import Skills from "../User/CreateProfile/Skills";
 
-const Employee = ({history}) => {
+const Employee = ({ history }) => {
+  const skillsList = [
+    "JavaScript",
+    "React Js",
+    "Node Js",
+    "React Native",
+    "Python",
+    "Mobile App Development",
+    "UI/UX Designing",
+  ];
+
   const classes = useStyles();
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
-  const [postJob, setPostJob] = useState({});
+  const [jobTitle, setJobTitle] = useState("")
+  const [jobDescription, setJobDescription] = useState("")
+  const [jobType, setJobType] = useState("")
+  const [companyURL, setCompanyURL] = useState("")
+  const [companyName, setCompanyName] = useState("")
+  const [workType, setWorkType] = useState("")
+  const [payScale, setPayScale] = useState("")
+  const [skills, setSkills] = useState([])
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -40,7 +58,15 @@ const Employee = ({history}) => {
     e.preventDefault();
     try {
       const getData = {
-        jobInfo: postJob,
+        jobInfo: {
+          jobTitle,
+          jobDescription,
+          companyName,
+          companyURL,
+          payScale,
+          workType,
+          skills
+        }
       };
 
       await Axios.post("http://localhost:5000/employee/postjob", getData);
@@ -84,10 +110,8 @@ const Employee = ({history}) => {
                   <Grid container spacing={2}>
                     <Grid item xs={6}>
                       <FilledInput
-                        value={postJob.jobTitle}
-                        onChange={(e) =>
-                          setPostJob({ ...postJob, jobTitle: e.target.value })
-                        }
+                        value={jobTitle}
+                        onChange={(e) => setJobTitle(e.target.value)}
                         autoComplete="off"
                         placeholder="Job title *"
                         disableUnderline
@@ -96,7 +120,8 @@ const Employee = ({history}) => {
                     </Grid>
                     <Grid item xs={6}>
                       <Select
-                      onChange={(e) => setPostJob({ ...postJob, jobType: e.target.value })}
+                      value={jobType}
+                        onChange={(e) => setJobType(e.target.value)}
                         name="type"
                         variant="filled"
                         disableUnderline
@@ -109,13 +134,8 @@ const Employee = ({history}) => {
                     </Grid>
                     <Grid item xs={6}>
                       <FilledInput
-                        value={postJob.companyName}
-                        onChange={(e) =>
-                          setPostJob({
-                            ...postJob,
-                            companyName: e.target.value,
-                          })
-                        }
+                        value={companyName}
+                        onChange={(e) => setCompanyName(e.target.value)}
                         autoComplete="off"
                         placeholder="Company name *"
                         disableUnderline
@@ -124,10 +144,8 @@ const Employee = ({history}) => {
                     </Grid>
                     <Grid item xs={6}>
                       <FilledInput
-                        value={postJob.companyUrl}
-                        onChange={(e) =>
-                          setPostJob({ ...postJob, companyUrl: e.target.value })
-                        }
+                        value={companyURL}
+                        onChange={(e) => setCompanyURL(e.target.value)}
                         autoComplete="off"
                         placeholder="Company Url *"
                         disableUnderline
@@ -136,7 +154,8 @@ const Employee = ({history}) => {
                     </Grid>
                     <Grid item xs={6}>
                       <Select
-                      onChange={(e) => setPostJob({ ...postJob, workType: e.target.value })}
+                        value={workType}
+                        onChange={(e) => setWorkType(e.target.value)}
                         disableUnderline
                         variant="filled"
                         fullWidth
@@ -147,10 +166,8 @@ const Employee = ({history}) => {
                     </Grid>
                     <Grid item xs={6}>
                       <FilledInput
-                        value={postJob.payScale}
-                        onChange={(e) =>
-                          setPostJob({ ...postJob, payScale: e.target.value })
-                        }
+                        value={payScale}
+                        onChange={(e) => setPayScale(e.target.value)}
                         autoComplete="off"
                         placeholder="Pay Scale *"
                         disableUnderline
@@ -160,13 +177,8 @@ const Employee = ({history}) => {
                     </Grid>
                     <Grid item xs={12}>
                       <FilledInput
-                        value={postJob.jobDescription}
-                        onChange={(e) =>
-                          setPostJob({
-                            ...postJob,
-                            jobDescription: e.target.value,
-                          })
-                        }
+                        value={jobDescription}
+                        onChange={(e) => setJobDescription(e.target.value)}
                         autoComplete="off"
                         placeholder="Job description *"
                         disableUnderline
@@ -176,23 +188,28 @@ const Employee = ({history}) => {
                       />
                     </Grid>
                   </Grid>
-                  {/* <Box mt={2}>
+                  <Box mt={2}>
                     <Typography>Skills</Typography>
-                    <Box display="flex">
-                      {skills.map((skill) => (
-                        <Box
-                          onClick={() => addRemoveSkill(skill)}
-                          className={`${classes.skillChip} ${
-                            jobDetails.skills.includes(skill) &&
-                            classes.included
-                          }`}
-                          key={skill}
-                        >
-                          {skill}
-                        </Box>
+                    <Grid container spacing={1} direction="row">
+                      {skillsList.map((skill, index) => (
+                        <Grid item key={index}>
+                          <Typography className={classes.skill}>
+                            <Button
+                              onClick={(e) => {
+                                let employee = {
+                                  skills: skill,
+                                };
+                                const skillList = skills.concat(employee.skills);
+                                setSkills(skillList)
+                              }}
+                            >
+                              {skill}
+                            </Button>
+                          </Typography>
+                        </Grid>
                       ))}
-                    </Box>
-                  </Box> */}
+                    </Grid>
+                  </Box>
                 </DialogContent>
                 <DialogActions>
                   <Box
@@ -231,7 +248,9 @@ const Employee = ({history}) => {
               fullWidth
               type="submit"
               variant="contained"
-              onClick={() => {history.push("/postedInternship")}}
+              onClick={() => {
+                history.push("/postedInternship");
+              }}
             >
               Posted Iternship
             </Button>

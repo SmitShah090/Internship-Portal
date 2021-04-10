@@ -30,15 +30,15 @@ const PostedInternships = () => {
     setLoading(true);
 
     try {
-      const companyInfo = await Axios.get(
+      const companyDetails = await Axios.get(
         `http://localhost:5000/employee/getinfo/${employee_ID}`
       );
-      console.log(companyInfo);
+      console.log(companyDetails);
 
-      setCompanyName(companyInfo.data.profileInfo.companyName);
-      setCompanyLocation(companyInfo.data.profileInfo.companyLocation);
-      setCompanyURL(companyInfo.data.profileInfo.companyURL);
-      setCompanyDescription(companyInfo.data.profileInfo.companyDescription);
+      setCompanyName(companyDetails.data.companyInfo.companyName);
+      setCompanyLocation(companyDetails.data.companyInfo.companyLocation);
+      setCompanyURL(companyDetails.data.companyInfo.companyURL);
+      setCompanyDescription(companyDetails.data.companyInfo.companyDescription);
 
       const data = await Axios.get("http://localhost:5000/employee/getjobs");
       console.log(data);
@@ -92,7 +92,7 @@ const PostedInternships = () => {
           {loading && <CircularProgress />}
           {jobs.map((job) => (
             <Grid item lg={10}>
-              <InternshipCard job={job.jobInfo} />
+              <InternshipCard job={job} />
             </Grid>
           ))}
         </Grid>

@@ -11,6 +11,7 @@ import LocationOnIcon from "@material-ui/icons/LocationOn";
 import WorkRoundedIcon from "@material-ui/icons/WorkRounded";
 import useStyles from "../../../styles/User/Internship";
 import ScheduleIcon from "@material-ui/icons/Schedule";
+import moment from "moment"
 
 const InternshipCard = ({ job }) => {
 
@@ -44,30 +45,21 @@ const InternshipCard = ({ job }) => {
                   </Grid>
                 </Grid>
                 <Grid item>
-                  <Button
+                 {
+                   job.skills.map((skill, index) => (
+                    <Button
+                    key={index}
                     color="secondary"
-                    className={classes.submit}
+                    className={classes.skill}
                     type="submit"
                     variant="contained"
                   >
-                    Sign In
+                    {skill}
                   </Button>
-                  <Button
-                    color="secondary"
-                    className={classes.submit}
-                    type="submit"
-                    variant="contained"
-                  >
-                    Sign In
-                  </Button>
-                  <Button
-                    color="secondary"
-                    type="submit"
-                    variant="contained"
-                    className={classes.submit}
-                  >
-                    Sign In
-                  </Button>
+                   ))
+                 }
+                  
+                  
                 </Grid>
               </Grid>
             </Grid>
@@ -103,7 +95,7 @@ const InternshipCard = ({ job }) => {
                         </Grid>
                         <Grid item>
                           <Typography className={classes.text}>
-                            {" "}
+                          
                             {job.jobType}
                           </Typography>
                         </Grid>
@@ -116,7 +108,8 @@ const InternshipCard = ({ job }) => {
                         </Grid>
                         <Grid item>
                           <Typography className={classes.text}>
-                            21,Oct,2020
+                            
+                            {moment(job.createdAt).format('lll')}
                           </Typography>
                         </Grid>
                       </Grid>

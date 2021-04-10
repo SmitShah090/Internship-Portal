@@ -15,6 +15,8 @@ const CreateProfile = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  const [photo, setPhoto] = useState("")
+
   const [skills, setSkills] = useState([]);
 
   const [age, setAge] = useState("");
@@ -52,6 +54,8 @@ const CreateProfile = () => {
       setName(Profile.name);
       setTitle(Profile.title);
       setDescription(Profile.description);
+
+      setPhoto(Profile.photo)
 
       if (Profile.basicInfo !== undefined) {
         setAge(Profile.basicInfo.age);
@@ -93,6 +97,8 @@ const CreateProfile = () => {
           name,
           title,
           description,
+          photo,
+          skills,
           basicInfo: {
             age,
             phoneno,
@@ -120,7 +126,7 @@ const CreateProfile = () => {
         `http://localhost:5000/auth/update-profile/${user_ID}`,
         updatedData
       );
-      console.log(updatedUser.data.updated_profile.profile);
+      console.log(updatedUser.data.updated_profile.profile.skills);
     } catch (err) {
       console.error(err);
     }
@@ -134,7 +140,7 @@ const CreateProfile = () => {
         <Container>
           <Grid container spacing={5}>
             <Grid item lg={3}>
-              <Image />
+              <Image photo={photo} setPhoto={setPhoto} />
             </Grid>
             <Grid item lg={9}>
               {/* Information Form */}
