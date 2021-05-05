@@ -39,9 +39,8 @@ mongoose.connect(
     console.log("Connected to MongoDB");
   }
 );
-app.use(express.json());
 
 
 // set up routes
-app.use('/auth', userRouter)
+app.use('/student', userRouter)
 app.use('/employee', employeeRouter)

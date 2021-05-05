@@ -5,30 +5,30 @@ import {
   Grid,
   Paper,
   Typography,
-} from "@material-ui/core";
-import React from "react";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
-import WorkRoundedIcon from "@material-ui/icons/WorkRounded";
-import useStyles from "../../../styles/User/Internship";
-import ScheduleIcon from "@material-ui/icons/Schedule";
-import moment from "moment"
+  Box,
+} from '@material-ui/core';
+import React from 'react';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import WorkRoundedIcon from '@material-ui/icons/WorkRounded';
+import useStyles from '../../../styles/User/Internship';
+import ScheduleIcon from '@material-ui/icons/Schedule';
+import moment from 'moment';
 
-const InternshipCard = ({ job }) => {
-
-  const classes = useStyles();
+const InternshipCard = ({job}) => {
+  const classes = useStyles ();
   return (
     <div>
       <Paper variant={4}>
         <Container>
           <Grid container spacing={3}>
-            <Grid item lg={6}>
+            <Grid item lg={6} xl={6}>
               <Grid
                 container
                 direction="column"
                 justify="space-around"
                 spacing={2}
               >
-                <Grid item>
+                <Grid item xl={12}>
                   <Grid container spacing={2}>
                     <Grid item>
                       <Avatar
@@ -40,26 +40,31 @@ const InternshipCard = ({ job }) => {
                       <Typography className={classes.jobTitle} variant="h6">
                         {job.jobTitle}
                       </Typography>
-                      <Typography variant="subtitle2"> {job.companyName} </Typography>
+                      <Typography variant="subtitle2">
+                        {' '}{job.companyName}{' '}
+                      </Typography>
                     </Grid>
                   </Grid>
                 </Grid>
                 <Grid item>
-                 {
-                   job.skills.map((skill, index) => (
-                    <Button
-                    key={index}
-                    color="secondary"
-                    className={classes.skill}
-                    type="submit"
-                    variant="contained"
-                  >
-                    {skill}
-                  </Button>
-                   ))
-                 }
-                  
-                  
+                  <Grid container spacing={1}>
+
+                    {job.skills.map ((skill, index) => (
+                      <Grid item>
+
+                        <Box
+                          key={index}
+                          color="secondary"
+                          className={classes.skill}
+                          type="submit"
+                          variant="contained"
+                        >
+                          {skill}
+                        </Box>
+                      </Grid>
+                    ))}
+                  </Grid>
+
                 </Grid>
               </Grid>
             </Grid>
@@ -72,7 +77,7 @@ const InternshipCard = ({ job }) => {
                 alignItems="flex-end"
               >
                 <Grid className={classes.stipned} item>
-                  {job.payScale}
+                  {`${job.payScale}LPA`}
                 </Grid>
                 <Grid item direction="row">
                   <Grid container spacing={4}>
@@ -95,7 +100,7 @@ const InternshipCard = ({ job }) => {
                         </Grid>
                         <Grid item>
                           <Typography className={classes.text}>
-                          
+
                             {job.jobType}
                           </Typography>
                         </Grid>
@@ -108,8 +113,8 @@ const InternshipCard = ({ job }) => {
                         </Grid>
                         <Grid item>
                           <Typography className={classes.text}>
-                            
-                            {moment(job.createdAt).format('lll')}
+
+                            {moment (job.createdAt).format ('lll')}
                           </Typography>
                         </Grid>
                       </Grid>

@@ -1,11 +1,14 @@
 import { Container, Grid, Link, Typography } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Auth from "../../../images/auth.png";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
 import useStyles from "../../../styles/Signup";
 import axios from "axios";
+import AuthContext from "../../../context/AuthContext";
+
+
 
 const Signup = ({history}) => {
   
@@ -13,7 +16,7 @@ const Signup = ({history}) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  async function register(e) {
+  async function registerUser(e) {
     e.preventDefault();
 
     try {
@@ -25,14 +28,12 @@ const Signup = ({history}) => {
 
       // await axios.post("http://localhost:5000/auth/", registerData);
       await axios.post(
-        "http://localhost:5000/auth/",
-        registerData, {
-          withCredentials: true
-        }
+        "http://localhost:5000/student/", registerData
       )
+      console.log(registerData);
        history.push("/studentlogin")
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   }
 
@@ -46,7 +47,7 @@ const Signup = ({history}) => {
             <img className={classes.image} src={Auth} />
           </Grid>
           <Grid item xs={12} md={6} lg={6}>
-            <form className={classes.form} onSubmit={register}>
+            <form className={classes.form} onSubmit={registerUser}>
               <Typography className={classes.title}>
                 STUDENT REGISTER
               </Typography>

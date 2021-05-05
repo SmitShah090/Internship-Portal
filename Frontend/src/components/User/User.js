@@ -21,7 +21,7 @@ const User = () => {
   };
 
   const logOut = async () => {
-    await Axios.get("http://localhost:5000/auth/logout")
+    await Axios.get("http://localhost:5000/student/logout")
     history.push("/")
   }
 
@@ -38,7 +38,7 @@ const User = () => {
       >
       <MenuItem onClick={() => handleClose("/profile")}>My Profile</MenuItem>
       <MenuItem onClick={() => handleClose("/create-profile")}>Create Profile</MenuItem>
-      <MenuItem onClick={logOut}>Logout</MenuItem>
+      <MenuItem onClick={(e) => logOut()}>Logout</MenuItem>
       </Menu>
       <hr></hr>
       <Internship />

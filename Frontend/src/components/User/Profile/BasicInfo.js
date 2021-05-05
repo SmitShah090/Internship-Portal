@@ -18,7 +18,7 @@ const BasicInfo = ({age, experiance, phoneNo, ctc, location, email}) => {
             </Grid>
             <Grid item lg={4} xs={12} sm={6} md={6}>
               <Typography className={classes.infoTitle} variant="subtitle1">
-                {age}
+                Age
               </Typography>
               <Typography variant="subtitle2">{age} years</Typography>
             </Grid>

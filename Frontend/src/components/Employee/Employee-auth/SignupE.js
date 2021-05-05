@@ -24,7 +24,7 @@ const SignupE = () => {
         password,
       };
 
-      await Axios.post("http://localhost:5000/employee/", registerData);
+      await Axios.post("http://localhost:5000/employee/", registerData );
 
       history.push("/employeeLogin");
       console.log(registerData);
@@ -99,7 +99,7 @@ const SignupE = () => {
                 Already a member?{" "}
                 <Button>
                   <Link
-                    to="/login"
+                    to="/employeelogin"
                     style={{ textDecorationLine: "none", color: "#00B074 " }}
                   >
                     {" "}

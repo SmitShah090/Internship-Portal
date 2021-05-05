@@ -114,19 +114,29 @@ const multer = require("multer");
 
 // LogOut for User
  const userLogout = async (req, res) => {
-  res
-    .cookie("token", "", {
+
+  res.status(200).clearCookie('token').send('cookie cleared.')
+
+  /* res
+    .cookie("token", "" , {
       httpOnly: true,
-      expires: new Date(0),
+      expires: new Date(Date.now() + 10000),
       secure: true,
       sameSite: "none",
     })
-    .send();
+    .send() */;
+    
+   /*  res.clearCookie('token')
+    await req.user.save()
+    res.status(200).send("user logout")
+    console.log('logout'); */
+
+
 };
 
 // User LoggedIn
  const userLoggedin = async (req, res) => {
-  console.log(`Hello ${req.cookies.tokens}`);
+  console.log(`Hello ${req.cookies.token}`);
   try {
     let token = req.cookies.token;
     console.log(token);
@@ -141,9 +151,11 @@ const multer = require("multer");
 };
 
 // Update the UserProfile
- const userProfileUpdate = async(req, res) => {
-    const { profile } = req.body;
 
+const userProfileUpdate = async(req, res) => {
+
+  const {profile} = req.body
+   
   try {
     const updatedprofile = await User.findByIdAndUpdate(req.params.id, {
       $set: {
@@ -154,6 +166,7 @@ const multer = require("multer");
 
     const savedProfile = await updatedprofile.save().then((result) => {
       res.status(200).json({
+        succes: 'succes',
         updated_profile: result,
       });
     });

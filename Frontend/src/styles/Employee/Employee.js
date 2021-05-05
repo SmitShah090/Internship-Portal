@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   skill: {
     color: theme.palette.primary.main,
-    margin: 10,
+    margin: 1,
     padding: 2,
     border: "1px solid rgba(0, 176, 116, 0.1) ",
     borderRadius: 15,

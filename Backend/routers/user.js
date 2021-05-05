@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const User = require("../models/user.js");
 const {
   userRegister,
   userLogin,
@@ -7,14 +6,11 @@ const {
   userLoggedin,
   userProfileUpdate,
   userProfile,
+  uploadImage,
 } = require("../controllers/user.js");
+const auth = require("../middleware/auth.js");
 
 // register
-
-router.get("/smit", (req, res) => {
-  res.cookie("Test", "Cookie")
-  res.send("Hi Smit")
-})
 
 router.post("/", userRegister);
 
@@ -32,7 +28,7 @@ router.get("/loggedIn", userLoggedin);
 
 // Create and update a User Profile
 
-router.patch("/update-profile/:id", userProfileUpdate);
+router.patch("/update-profile/:id",  userProfileUpdate);
 
 // Get a User Profile
 

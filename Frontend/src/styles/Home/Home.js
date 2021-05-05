@@ -67,7 +67,7 @@ const useStyles = makeStyles(theme => ({
     categories: {
         color: '#2B3940',
         marginTop: 20,
-        fontSize: 26,
+        fontSize: 22,
         paddingBottom: 5
     },
     headingGrid: {

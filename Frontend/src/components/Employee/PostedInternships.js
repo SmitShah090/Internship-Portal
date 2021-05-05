@@ -24,7 +24,7 @@ const PostedInternships = () => {
 
   const storedEmployee = JSON.parse(localStorage.getItem("employeeInfo"));
 
-  const employee_ID = storedEmployee.existingEmployee._id;
+  const employee_ID = storedEmployee._id;
 
   useEffect(async () => {
     setLoading(true);

@@ -18,7 +18,7 @@ const CreateEmployeeProfile = ({history}) => {
 
   const storedEmployee = JSON.parse(localStorage.getItem("employeeInfo"));
 
-  const employee_ID = storedEmployee.existingEmployee._id;
+  const employee_ID = storedEmployee._id;
 
   const [companyName, setCompanyName] = useState("");
   const [companyLocation, setCompanyLocation] = useState("");
@@ -34,8 +34,8 @@ const CreateEmployeeProfile = ({history}) => {
       `http://localhost:5000/employee/getinfo/${employee_ID}`
     );
 
-   const CompanyProfile =  companyInfo.data.profileInfo
-   console.log(CompanyProfile);
+   const CompanyProfile =  companyInfo.data.companyInfo
+   console.log(companyInfo.data);
 
    if(CompanyProfile !== undefined){
 

@@ -1,5 +1,5 @@
 import { Container, Grid, Link, Typography } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Auth from "../../../images/auth.png";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -8,11 +8,11 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 import useStyles from "../../../styles/Login";
 import axios from "axios";
+import AuthContext from "../../../context/AuthContext";
 
 const Login = ({history}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
 
   async function login(e) {
     e.preventDefault();
@@ -25,7 +25,7 @@ const Login = ({history}) => {
 
       // await axios.post("http://localhost:5000/auth/", registerData);
       const createdUser = await axios.post(
-        "http://localhost:5000/auth/login",
+        "http://localhost:5000/student/login",
         loginData,
         {
           withCredentials: true,

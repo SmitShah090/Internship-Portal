@@ -1,97 +1,109 @@
-import { Avatar, Button, Container, Grid } from "@material-ui/core";
-import React, { useState, useEffect } from "react";
-import useStyles from "../../../styles/User/ProfileForm";
-import axios from "axios";
-import FormInfo from "./FormInfo";
-import BasicInfo from "./BasicInfo";
-import Skills from "./Skills";
-import ProjectInfo from "./ProjectInfo";
-import EducationInfo from "./EducationInfo";
-import CertificationInfo from "./CertificationInfo";
-import Image from "./Image";
+import {Avatar, Button, Container, Grid} from '@material-ui/core';
+import React, {useState, useEffect} from 'react';
+import useStyles from '../../../styles/User/ProfileForm';
+import axios from 'axios';
+import FormInfo from './FormInfo';
+import BasicInfo from './BasicInfo';
+import Skills from './Skills';
+import ProjectInfo from './ProjectInfo';
+import EducationInfo from './EducationInfo';
+import CertificationInfo from './CertificationInfo';
+import Image from './Image';
+import {v4 as uuidv4} from 'uuid';
 
 const CreateProfile = () => {
-  const [name, setName] = useState("");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [name, setName] = useState ('');
+  const [title, setTitle] = useState ('');
+  const [description, setDescription] = useState ('');
 
-  const [photo, setPhoto] = useState("")
+  const [photo, setPhoto] = useState ('');
 
-  const [skills, setSkills] = useState([]);
+  const [skills, setSkills] = useState ([]);
 
-  const [age, setAge] = useState("");
-  const [phoneno, setPhoneno] = useState("");
-  const [experiance, setExperiance] = useState("");
-  const [ctc, setCtc] = useState("");
-  const [location, setLocation] = useState("");
-  const [email, setEmail] = useState("");
+  const [age, setAge] = useState ('');
+  const [phoneno, setPhoneno] = useState ('');
+  const [experiance, setExperiance] = useState ('');
+  const [ctc, setCtc] = useState ('');
+  const [location, setLocation] = useState ('');
+  const [email, setEmail] = useState ('');
 
-  const [university, setUniversity] = useState("");
-  const [edescription, setEdescription] = useState("");
+  const [education, setEducation] = useState ([
+    {university: '', edescription: ''},
+  ]);
+  /* const [university, setUniversity] = useState("");
+  const [edescription, setEdescription] = useState(""); */
 
-  const [projectname, setProjectname] = useState("");
-  const [pdescription, setPdescription] = useState("");
+  const [projects, setProjects] = useState ([
+    {projectname: '', pdescription: ''},
+  ]);
+  /*  const [projectname, setProjectname] = useState("");
+  const [pdescription, setPdescription] = useState(""); */
 
-  const [certiname, setCertiname] = useState("");
-  const [cdescription, setCdescription] = useState("");
+  const [certification, setCertification] = useState ([
+    {certiname: '', cdescription: ''},
+  ]);
+  /* const [certiname, setCertiname] = useState("");
+  const [cdescription, setCdescription] = useState(""); */
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState (false);
 
-  const storedUser = JSON.parse(localStorage.getItem("userInfo"));
+  const storedUser = JSON.parse (localStorage.getItem ('userInfo'));
 
   const user_ID = storedUser._id;
 
-  useEffect(async () => {
-    setLoading(true);
-    const userInfo = await axios.get(
-      `http://localhost:5000/auth/get-profile/${user_ID}`
+  useEffect (async () => {
+    setLoading (true);
+    const userInfo = await axios.get (
+      `http://localhost:5000/student/get-profile/${user_ID}`,{
+        withCredentials: true
+      }
     );
-    console.log(userInfo.data.profile);
+    console.log (userInfo.data.profile);
 
     const Profile = userInfo.data.profile;
+    console.log (Profile.education);
 
     if (Profile !== undefined) {
-      setName(Profile.name);
-      setTitle(Profile.title);
-      setDescription(Profile.description);
+      setName (Profile.name);
+      setTitle (Profile.title);
+      setDescription (Profile.description);
 
-      setPhoto(Profile.photo)
+      setPhoto (Profile.photo);
 
       if (Profile.basicInfo !== undefined) {
-        setAge(Profile.basicInfo.age);
-        setCtc(Profile.basicInfo.ctc);
-        setExperiance(Profile.basicInfo.experiance);
-        setLocation(Profile.basicInfo.location);
-        setPhoneno(Profile.basicInfo.phoneno);
-        setEmail(Profile.basicInfo.email);
+        setAge (Profile.basicInfo.age);
+        setCtc (Profile.basicInfo.ctc);
+        setExperiance (Profile.basicInfo.experiance);
+        setLocation (Profile.basicInfo.location);
+        setPhoneno (Profile.basicInfo.phoneno);
+        setEmail (Profile.basicInfo.email);
       }
 
       if (Profile.skills !== undefined) {
-        setSkills(Profile.skills);
+        setSkills (Profile.skills);
       }
 
       if (Profile.education !== undefined) {
-        setUniversity(Profile.education.university);
-        setEdescription(Profile.education.edescription);
+        setEducation (Profile.education);
       }
 
       if (Profile.projects !== undefined) {
-        setProjectname(Profile.projects.projectname);
-        setPdescription(Profile.projects.pdescription);
+        setProjects (Profile.projects);
       }
       if (Profile.certification !== undefined) {
-        setCertiname(Profile.certification.certiname);
-        setCdescription(Profile.certification.cdescription);
+        setCertification (Profile.certification);
       }
     }
 
-    setLoading(false);
+    setLoading (false);
   }, []);
 
-  const OnSubmit = async (e) => {
-    e.preventDefault();
+  const OnSubmit = async e => {
+    e.preventDefault ();
 
     try {
+      
+     
       const updatedData = {
         profile: {
           name,
@@ -107,32 +119,37 @@ const CreateProfile = () => {
             location,
             email,
           },
-          education: {
-            university,
-            edescription,
-          },
-          projects: {
-            projectname,
-            pdescription,
-          },
-          certification: {
-            certiname,
-            cdescription,
-          },
+          education: [...education],
+          projects: [...projects],
+          certification: [...certification],
         },
       };
 
-      const updatedUser = await axios.patch(
-        `http://localhost:5000/auth/update-profile/${user_ID}`,
-        updatedData
+      console.log (education);
+
+      const updatedUser = await axios.patch (
+        `http://localhost:5000/student/update-profile/${user_ID}`,
+        updatedData,{
+         // method: 'PATCH',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+         withCredentials: true
+        }
       );
-      console.log(updatedUser.data.updated_profile.profile.skills);
+      console.log (updatedUser.data.updated_profile.profile);
+
+
+      
+        
     } catch (err) {
-      console.error(err);
+      console.error (err);
     }
   };
 
-  const classes = useStyles();
+  const classes = useStyles ();
 
   return (
     <div className={classes.root}>
@@ -179,30 +196,36 @@ const CreateProfile = () => {
               {/* Education Information Form */}
               <EducationInfo
                 loading={loading}
-                university={university}
+                education={education}
+                setEducation={setEducation}
+                /* university={university}
                 edescription={edescription}
                 setUniversity={setUniversity}
-                setEdescription={setEdescription}
+                setEdescription={setEdescription} */
               />
             </Grid>
             <Grid item lg={12}>
               {/* Projects Information Form */}
               <ProjectInfo
                 loading={loading}
-                projectname={projectname}
+                projects={projects}
+                setProjects={setProjects}
+                /* projectname={projectname}
                 pdescription={pdescription}
                 setPdescription={setPdescription}
-                setProjectname={setProjectname}
+                setProjectname={setProjectname} */
               />
             </Grid>
             <Grid item lg={12}>
               {/* Certificate Information Form */}
               <CertificationInfo
                 loading={loading}
-                certiname={certiname}
+                certification={certification}
+                setCertification={setCertification}
+                /* certiname={certiname}
                 cdescription={cdescription}
                 setCertiname={setCertiname}
-                setCdescription={setCdescription}
+                setCdescription={setCdescription} */
               />
             </Grid>
           </Grid>

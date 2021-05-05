@@ -28,10 +28,10 @@ const useStyles = makeStyles(theme => ({
     },
     skill: {
       color: theme.palette.secondary.main,
-      padding: 5,
+      padding: 6,
       margin: 5,
       border: "1px solid rgba(0, 176, 116, 0.1) ",
-      borderRadius: 15,
+      borderRadius: 10,
       backgroundColor: "rgba(0, 176, 116, 0.2)",
       textAlign: "center",
       textDecoration: "none"

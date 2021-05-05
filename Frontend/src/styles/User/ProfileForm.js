@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.light,
     textAlign: "center",
   },
+  mt_30: {
+    marginTop: 30
+  }
 }));
 
 export default useStyles;

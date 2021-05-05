@@ -1,4 +1,5 @@
 import {
+  CircularProgress,
   Container,
   Grid,
   makeStyles,
@@ -18,14 +19,23 @@ const About = () => {
   return (
     <div className={classes.root}>
       <Container>
+        {/* <Grid container>
+          <Grid item>
+
+        <Typography className={classes.heading} variant="h6">About Us <hr></hr></Typography>
+          </Grid>
+        </Grid> */}
+        
         <Grid
           className={classes.container}
           justify="space-between"
           container
           spacing={3}
         >
+          {/* About Us */}
           <Grid item xs={12} md={6} lg={5}>
-            <img className={classes.image} src={Aboutimg} />
+            {Aboutimg ? <img className={classes.image} src={Aboutimg} /> : <CircularProgress />}
+            
           </Grid>
           <Grid item className={classes.information} xs={12} md={6} lg={5}>
             <Typography gutterBottom paragraph>
@@ -59,6 +69,7 @@ const About = () => {
           container
           spacing={3}
         >
+          {/* Our Photo */}
           <Grid item lg={4} sm={12} md={6} xl={12}>
             <img src={Smit} />
             <Typography variant="h6">SMIT SHAH</Typography>
@@ -69,12 +80,12 @@ const About = () => {
           <Grid item lg={4} sm={12} md={6} xl={12}>
             <img src={zeel} />
             <Typography variant="h6">ZEEL PATEL</Typography>
-            <Typography variant="subtitle1">WEB DEVELOPER</Typography>
+            <Typography variant="subtitle1">MACHINE LEARNING ENGINEER</Typography>
           </Grid>
           <Grid item lg={4} sm={12} md={6} xl={12}>
             <img src={Aash} />
             <Typography variant="h6">AASH SHAH</Typography>
-            <Typography variant="subtitle1">WEB DEVELOPER</Typography>
+            <Typography variant="subtitle1">FRONTEND WEB DEVELOPER</Typography>
           </Grid>
         </Grid>
       </Container>

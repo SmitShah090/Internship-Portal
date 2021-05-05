@@ -1,6 +1,7 @@
 const Employee = require("../models/Employee");
 const bcrypt = require("bcryptjs");
 const Job = require("../models/job");
+const jwt = require("jsonwebtoken");
 
 // Register Employee
 const employeeRegister = async (req, res) => {
@@ -36,7 +37,27 @@ const employeeRegister = async (req, res) => {
     })
     const savedEmployee =  newEmployee.save()
 
-    res.json({savedEmployee})
+    const token = jwt.sign(
+      {
+        _id: savedEmployee._id,
+      },
+      process.env.JWT_SECRET
+    );
+    console.log(token);
+
+   // savedEmployee.tokens = savedEmployee.tokens.concat({ token });
+   // await savedEmployee.save();
+    // send the token in a HTTP-only cookie
+
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      })
+      .send("Cookies sent");
+
+   // res.json({savedEmployee})
   } catch(err) {
     console.error(err);
     res.status(500).send();
@@ -48,12 +69,6 @@ const employeeLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // validate
-    if (!email || !password)
-      return res
-        .status(400)
-        .json({ errorMessage: "Please enter all required fields." });
-
     const existingEmployee = await Employee.findOne({ email });
     if (!existingEmployee)
       return res.status(401).json({ errorMessage: "Wrong email or password." });
@@ -62,9 +77,27 @@ const employeeLogin = async (req, res) => {
       password,
       existingEmployee.passwordHash
     );
+
     if (!passwordCorrect)
       return res.status(401).json({ errorMessage: "Wrong email or password." });
-      res.json({existingEmployee})
+
+      let token = jwt.sign(
+        {
+          employee: existingEmployee._id,
+        },
+        process.env.JWT_SECRET
+      );
+      // send the token in a HTTP-only cookie
+  
+      res
+        .cookie("token", token, {
+          maxAge: 900000,
+          httpOnly: true,
+          // secure: true,
+        })
+        .json(existingEmployee);
+
+
   } catch(err) {
     console.error(err);
     res.status(500).send();
@@ -94,7 +127,6 @@ const postJob = async(req, res) => {
     res.json(savedjob);
   } catch (error) {
     console.error(error);
-    res.status(500).send();
   }
 }
 
@@ -111,15 +143,12 @@ const employeeProfileUpdate = async(req, res) => {
       }
     })
 
-    const savedUpdatedProfileInfo = await updatedProfileInfo.save().then((result) => {
-      res.send(200).json({
-        updated_Profile_Info: result
-      })
-    })
-
-    res.json({savedUpdatedProfileInfo})
-  } catch (error) {
+    const savedUpdatedProfileInfo = await updatedProfileInfo.save()
+    console.log('Hello');
+    res.json(savedUpdatedProfileInfo)
     
+  } catch (error) {
+    console.log(error.message);
   }
 }
 
@@ -132,7 +161,6 @@ const getJobs = async(req, res) => {
     })
   } catch (error) {
     console.error(error);
-    res.status(500).send();
   }
 }
 
@@ -149,7 +177,6 @@ const getCompanyInfo = async(req, res) => {
   } catch (error) {
     console.error(error);
    
-    res.status(500).json({ error });
   }
 }
 

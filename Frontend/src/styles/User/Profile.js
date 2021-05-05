@@ -33,6 +33,17 @@ const useStyles = makeStyles(theme => ({
     profilePic: {
       width: theme.spacing(8),
       height: theme.spacing(8)
+    },
+    aeroicon: {
+      marginTop: 3
+    },
+    aerobox: {
+      width: '100%',
+      height: '100%',
+      backgroundColor: "white",
+      borderRadius: 100,
+      marginBottom: 10,
+      marginTop: -20
     }
   }));
 

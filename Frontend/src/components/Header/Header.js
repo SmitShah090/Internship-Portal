@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -13,8 +13,10 @@ import { withRouter } from "react-router-dom";
 import Logo from "../../images/Charusat-logo.png";
 import useStyles from "../../styles/Header";
 import { FormControl, InputLabel, Select } from "@material-ui/core";
+import AuthContext from "../../context/AuthContext";
 
 const Header = (props) => {
+
   const { history } = props;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -49,8 +51,8 @@ const Header = (props) => {
       pageURL: "/internships",
     },
     {
-      menuTitle: "Profile",
-      pageURL: "/profile",
+      menuTitle: "Project",
+      pageURL: "/project",
     },
     {
       menuTitle: "Contact",
@@ -103,6 +105,7 @@ const Header = (props) => {
             </>
           ) : (
             <div className={classes.headerOptions}>
+              
               <Button
                 className={classes.button}
                 color="inherit"
@@ -127,7 +130,7 @@ const Header = (props) => {
               <Button
                 className={classes.button}
                 color="inherit"
-                onClick={() => handleButtonClick("/profile")}
+                onClick={() => handleButtonClick("/project")}
               >
                 Projects
               </Button>

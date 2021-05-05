@@ -2,7 +2,7 @@ import { Container, Grid, Paper, Typography } from "@material-ui/core";
 import React from "react";
 import useStyles from "../../../styles/User/Profile";
 
-const ProjectInfo = ({projectName, description}) => {
+const ProjectInfo = ({projects, loading}) => {
     const classes = useStyles()
   return (
     <div>
@@ -14,10 +14,13 @@ const ProjectInfo = ({projectName, description}) => {
                 Projects
               </Typography>
             </Grid>
-            <Grid item lg={12} sm={12} md={12}>
-              <Typography variant="subtitle2">{projectName}</Typography>
-              <Typography variant="caption">{description}</Typography>
+            {projects.map((project, key) => (
+
+            <Grid key={project._id} item lg={12} sm={12} md={12}>
+              <Typography variant="subtitle2">{project.projectname}</Typography>
+              <Typography variant="caption">{project.pdescription}</Typography>
             </Grid>
+            ))}
             
           </Grid>
         </Container>

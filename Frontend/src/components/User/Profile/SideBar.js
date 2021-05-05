@@ -4,39 +4,36 @@ import {
   Container,
   Grid,
   Typography,
-} from "@material-ui/core";
-import React from "react";
-import useStyles from "../../../styles/User/Profile";
+} from '@material-ui/core';
+import React from 'react';
+import useStyles from '../../../styles/User/Profile';
 
-const SideBar = ({ name, title, description, loading, skills, photo }) => {
-  const classes = useStyles();
+const SideBar = ({name, title, description, loading, skills, photo}) => {
+  const classes = useStyles ();
   return (
     <div>
       <Container>
         <Grid
           container
           direction="column"
+          justify="center"
           alignItems="center"
           spacing={2}
-          justify="center"
         >
-          <Grid item>
-            <Grid container justify="center" alignItems="center" spacing={3}>
-              {loading && <CircularProgress />}
-              <Grid item lg={12}>
-                <Avatar alt="zemy harp" src={photo} className={classes.icon} />
-              </Grid>
-              <Grid item lg={12}>
-                <Typography className={classes.name} variant="h6">
-                  {name}
-                </Typography>
-              </Grid>
-              <Grid item lg={12}>
-                <Typography className={classes.title} variant="h6">
-                  {title}
-                </Typography>
-              </Grid>
-            </Grid>
+
+          {loading && <CircularProgress />}
+          <Grid item lg={12} className={classes.heading}>
+            <Avatar alt="zemy harp" src={photo} className={classes.icon} />
+          </Grid>
+          <Grid item lg={12} className={classes.heading}>
+            <Typography className={classes.name} variant="h6">
+              {name}
+            </Typography>
+          </Grid>
+          <Grid item lg={12} className={classes.heading}>
+            <Typography className={classes.title} variant="h6">
+              {title}
+            </Typography>
           </Grid>
           <Grid item>
             <Typography>
@@ -49,7 +46,7 @@ const SideBar = ({ name, title, description, loading, skills, photo }) => {
               to design. */}
             </Typography>
           </Grid>
-          <Grid item></Grid>
+          <Grid item />
         </Grid>
 
         <Grid container direction="column" spacing={3}>
@@ -60,7 +57,7 @@ const SideBar = ({ name, title, description, loading, skills, photo }) => {
           </Grid>
           <Grid item>
             <Grid container spacing={1} direction="row">
-              {skills.map((skill, index) => (
+              {skills.map ((skill, index) => (
                 <Grid item lg={6} xs={4} key={index}>
                   <Typography className={classes.skill}>{skill}</Typography>
                 </Grid>

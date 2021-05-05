@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+var uuid = require('node-uuid');
 
 const UserSchema = new Schema(
   {
@@ -58,7 +59,11 @@ const UserSchema = new Schema(
           require: false,
         },
       },
-      education: {
+      education: [{
+        _id: { 
+          type: String, 
+          default: uuid.v1()
+        },
         university: {
           type: String,
           require: false,
@@ -67,8 +72,12 @@ const UserSchema = new Schema(
           type: String,
           require: false,
         },
-      },
-      projects: {
+      }],
+      projects: [{
+        _id: { 
+          type: String, 
+          default: uuid.v1()
+        },
         projectname: {
           type: String,
           require: false,
@@ -77,8 +86,12 @@ const UserSchema = new Schema(
           type: String,
           require: false,
         },
-      },
-      certification: {
+      }],
+      certification: [{
+        _id: { 
+          type: String, 
+          default: uuid.v1()
+        },
         certiname: {
           type: String,
           require: false,
@@ -87,7 +100,7 @@ const UserSchema = new Schema(
           type: String,
           require: false,
         },
-      },
+      }],
     },
     tokens: [{
       token: {

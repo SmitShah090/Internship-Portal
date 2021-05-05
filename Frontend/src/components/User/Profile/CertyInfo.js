@@ -2,7 +2,7 @@ import { Container, Grid, Paper, Typography } from "@material-ui/core";
 import React from "react";
 import useStyles from "../../../styles/User/Profile";
 
-const CertyInfo = ({certiName, description}) => {
+const CertyInfo = ({certification, loading}) => {
     const classes = useStyles()
   return (
     <div>
@@ -14,10 +14,13 @@ const CertyInfo = ({certiName, description}) => {
                 Certification
               </Typography>
             </Grid>
-            <Grid item lg={12} sm={12} md={12}>
-              <Typography variant="subtitle2">{certiName}</Typography>
-              <Typography variant="caption">{description}</Typography>
+            {certification.map((certi, key) => (
+
+            <Grid key={certi._id} item lg={12} sm={12} md={12}>
+              <Typography variant="subtitle2">{certi.certiname}</Typography>
+              <Typography variant="caption">{certi.cdescription}</Typography>
             </Grid>
+            ))}
             
           </Grid>
         </Container>

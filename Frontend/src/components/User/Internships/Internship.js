@@ -16,18 +16,50 @@ import useStyles from "../../../styles/User/Internship";
 import SideBar from "./SideBar";
 import InternshipCard from "./InternshipCard";
 
-const Internship = () => {
+const Internship = ({history}) => {
   const [jobs, setJobs] = useState([]);
+  const [query, setQuery] = useState("")
+  const [search, setSearch] = useState("")
 
-  useEffect(async () => {
+ /*  const getInternships = async () => {
     try {
-      const data = await Axios.get("http://localhost:5000/employee/getjobs");
+      const data = await Axios.get("http://localhost:5000/employee/getjobs",{
+        withCredentials: true
+      });
       console.log(data);
       setJobs(data.data);
+      if(!data.status === 200){
+        const error = new Error(data.error)
+        throw error;
+      }
     } catch (error) {
       console.log(error);
+      history.push("/studentlogin")
     }
+  } */
+
+  useEffect(async () => {
+   const data =   await Axios.get("http://localhost:5000/employee/getjobs",{
+      withCredentials: true
+    });
+    console.log(data.data);
+      setJobs(data.data);
+   // getInternships()
   }, [setJobs]);
+
+ /*  const filterSearch = jobs.filter( job => {
+    return job.toLowerCase().includes( search.toLowerCase())
+  }) */
+
+
+ /*  function search (jobs){
+    return jobs.filter(
+      (job) => 
+      job.job.location.toLowerCase().indexOf(query) > -1 ||
+      job.job.jobType.toLowerCase().indexOf(query) > -1 
+      
+      )
+  } */
 
   const classes = useStyles();
 
@@ -48,12 +80,12 @@ const Internship = () => {
                   <Grid container>
                     <Grid lg={4} item spacing={4} alignItems="flex-start">
                       <SearchIcon className={classes.icon} opacity="50%" />
-                      <InputBase id="Search-Job" placeholder="Search for job" />
+                      <InputBase id="Search-Job" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search for job" />
                     </Grid>
                     <hr color="grey"></hr>
                     <Grid item lg={4} alignItems="flex-start">
                       <LocationOnIcon className={classes.icon} opacity="50%" />
-                      <InputBase id="location" placeholder="location" />
+                      <InputBase value={search} onChange={(e) => setSearch(e.target.value)} id="location" placeholder="location" />
                     </Grid>
                     <Grid item lg={2} alignItems="flex-start">
                       <Button
@@ -73,7 +105,7 @@ const Internship = () => {
 
             {/* Internship Card (Job Details) */}
             {jobs.map((job) => (
-              <Grid item lg={12}>
+              <Grid item lg={12} xl={12}>
                 <InternshipCard job={job} />
               </Grid>
             ))}
