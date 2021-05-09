@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SmitShah090/Internship_portal.git"
+    "url": "git+https://github.com/SmitShah090/Internship-Portal.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SmitShah090/Internship_portal/issues"
+    "url": "https://github.com/SmitShah090/Internship-Portal/issues"
   },
-  "homepage": "https://github.com/SmitShah090/Internship_portal#readme",
+  "homepage": "https://github.com/SmitShah090/Internship-Portal#readme",
   "dependencies": {
     "concurrently": "^6.0.0"
   }
