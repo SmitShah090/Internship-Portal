@@ -10,7 +10,7 @@
     "dev" : "concurrently \"npm run server\" \"npm run client\"",
     "build" : "cd Frontend && npm run build",
     "install-client": "cd Frontend && npm install",
-    "heroku-postbuild" : "npm run install-client && npm run build"
+    "heroku-postbuild" : "NPM_CONFIG_PRODUCTION=false npm run install-client && npm run build"
   },
   "repository": {
     "type": "git",
