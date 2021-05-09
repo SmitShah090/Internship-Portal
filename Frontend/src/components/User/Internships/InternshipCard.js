@@ -16,6 +16,15 @@ import moment from 'moment';
 
 const InternshipCard = ({job}) => {
   const classes = useStyles ();
+
+  const {photo} = job
+
+  console.log(photo);
+
+  const temp = photo && photo.split("\\");
+
+  const photoURL = temp.length && (temp[temp.length-2] + '\\' + temp[temp.length - 1]); 
+
   return (
     <div>
       <Paper variant={4}>
@@ -33,7 +42,7 @@ const InternshipCard = ({job}) => {
                     <Grid item>
                       <Avatar
                         alt="Remy Sharp"
-                        src="/static/images/avatar/1.jpg"
+                        src={photoURL}
                       />
                     </Grid>
                     <Grid item>

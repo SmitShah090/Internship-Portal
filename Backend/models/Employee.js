@@ -13,6 +13,9 @@ const EmployeeSchema = new Schema({
         type: String
     },
     companyInfo: {
+        photo: {
+            type: String
+        },
         companyName: {
             type: String
         },

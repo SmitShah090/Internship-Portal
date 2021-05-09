@@ -69,8 +69,8 @@ const Profile = ({history}) => {
       }
     );
     console.log (userInfo.data.profile);
-
     const Profile = userInfo.data.profile;
+    console.log(typeof Profile.photo)
     console.log (Profile.education);
 
     Profile.name !== undefined
@@ -82,7 +82,8 @@ const Profile = ({history}) => {
     Profile.description !== undefined
       ? setDescription (Profile.description)
       : history.push ('/create-profile');
-    // Profile.photo !== undefined ?  setPhoto(Profile.photo) : history.push("/create-profile")
+
+    Profile.photo !== undefined ?  setPhoto(Profile.photo) : history.push("/create-profile")
 
     Profile.skills !== undefined
       ? setSkills (Profile.skills)

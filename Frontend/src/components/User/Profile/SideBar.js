@@ -10,6 +10,12 @@ import useStyles from '../../../styles/User/Profile';
 
 const SideBar = ({name, title, description, loading, skills, photo}) => {
   const classes = useStyles ();
+  const temp = photo.split('\\');
+  const photoURL = temp[temp.length-2] + '\\' + temp[temp.length - 1];
+
+  console.log(temp)
+  console.log(photoURL)
+
   return (
     <div>
       <Container>
@@ -23,7 +29,7 @@ const SideBar = ({name, title, description, loading, skills, photo}) => {
 
           {loading && <CircularProgress />}
           <Grid item lg={12} className={classes.heading}>
-            <Avatar alt="zemy harp" src={photo} className={classes.icon} />
+            <Avatar alt="" src={photoURL} className={classes.icon}/>
           </Grid>
           <Grid item lg={12} className={classes.heading}>
             <Typography className={classes.name} variant="h6">

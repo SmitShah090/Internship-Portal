@@ -130,6 +130,10 @@ const postJob = async(req, res) => {
   }
 }
 
+const employeeUploadImage = async(req, res) => {
+  res.send(`${req.file.path}`)
+}
+
 // Update Employee Profile
 const employeeProfileUpdate = async(req, res) => {
 
@@ -180,4 +184,4 @@ const getCompanyInfo = async(req, res) => {
   }
 }
 
-module.exports = { employeeRegister, employeeLogin, employeeLogout, postJob, getJobs, employeeProfileUpdate, getCompanyInfo };
+module.exports = { employeeRegister, employeeUploadImage, employeeLogin, employeeLogout, postJob, getJobs, employeeProfileUpdate, getCompanyInfo };

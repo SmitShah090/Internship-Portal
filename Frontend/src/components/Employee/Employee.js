@@ -6,6 +6,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Fab,
   FilledInput,
   Grid,
   IconButton,
@@ -21,6 +22,9 @@ import Axios from 'axios';
 import EmployeeProfile from './CreateEmployeeProfile';
 import EmployeeHeader from './EmployeeHeader';
 import Skills from '../User/CreateProfile/Skills';
+import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
+import axios from 'axios';
+
 
 const Employee = ({history}) => {
   const skillsList = [
@@ -42,13 +46,14 @@ const Employee = ({history}) => {
     'AWS',
     'Troubleshooting',
     'SDLC',
-    'Problem Solving'
+    'Problem Solving',
   ];
 
   const classes = useStyles ();
 
   const [open, setOpen] = useState (false);
 
+  const [photo, setPhoto] = useState("")
   const [jobTitle, setJobTitle] = useState ('');
   const [jobDescription, setJobDescription] = useState ('');
   const [jobType, setJobType] = useState ('');
@@ -71,6 +76,7 @@ const Employee = ({history}) => {
     try {
       const getData = {
         jobInfo: {
+          photo,
           jobTitle,
           jobDescription,
           companyName,
@@ -88,6 +94,23 @@ const Employee = ({history}) => {
       console.log (error);
     }
   };
+
+  const uploadImage = async(e) => {
+    e.preventDefault()
+    const file = e.target.files[0]
+    const formData = new FormData();
+    formData.append('image', file);
+
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }
+
+    const { data } = await axios.post(`http://localhost:5000/student/upload`, formData, config );
+    console.log(data);
+    setPhoto(data)
+  }
 
   return (
     <div className={classes.root}>
@@ -121,6 +144,26 @@ const Employee = ({history}) => {
                 </DialogTitle>
                 <DialogContent>
                   <Grid container spacing={2}>
+                    <Grid item xs={6}>
+
+                    </Grid>
+                    <Grid justify="center" alignItems="center" item xs={6}>
+                      <form>
+                        <input
+                        style={{display: "none"}}
+                           onChange={uploadImage} 
+                          accept="image/*"
+                          id="contained-button-file"
+                          multiple
+                          type="file"
+                        />
+                        <label htmlFor="contained-button-file">
+                          <Fab component="span" className={classes.profilePic}>
+                            <AddPhotoAlternateIcon />
+                          </Fab>
+                        </label>
+                      </form>
+                    </Grid>
                     <Grid item xs={6}>
                       <FilledInput
                         value={jobTitle}

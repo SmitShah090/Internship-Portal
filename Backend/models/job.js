@@ -3,6 +3,9 @@ const Schema = mongoose.Schema;
 
 const jobSchema = new Schema(
   {
+    photo: {
+      type: String
+    },
     jobTitle: {
       type: String,
     },

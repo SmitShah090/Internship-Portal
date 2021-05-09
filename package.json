@@ -6,7 +6,10 @@
   "scripts": {
     "server" : "nodemon Backend/index.js",
     "client" : "npm start --prefix Frontend",
-    "dev" : "concurrently \"npm run server\" \"npm run client\""
+    "dev" : "concurrently \"npm run server\" \"npm run client\"",
+    "build" : "cd Frontend && npm run build",
+    "install-client": "cd Frontend && npm install",
+    "heroku-postbuild" : "npm run install-Frontend && npm run build"
   },
   "repository": {
     "type": "git",

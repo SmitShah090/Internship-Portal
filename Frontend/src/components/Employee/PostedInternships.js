@@ -19,6 +19,7 @@ const PostedInternships = () => {
   const [companyLocation, setCompanyLocation] = useState("");
   const [companyDescription, setCompanyDescription] = useState("");
   const [companyURL, setCompanyURL] = useState("");
+  const [photo, setPhoto] = useState("")
 
   const [loading, setLoading] = useState(false);
 
@@ -39,6 +40,11 @@ const PostedInternships = () => {
       setCompanyLocation(companyDetails.data.companyInfo.companyLocation);
       setCompanyURL(companyDetails.data.companyInfo.companyURL);
       setCompanyDescription(companyDetails.data.companyInfo.companyDescription);
+
+      const ProfilePic = companyDetails.data.companyInfo.photo;
+      const temp = ProfilePic && ProfilePic.split ('\\');
+      const photoURL = temp[temp.length - 2] + '\\' + temp[temp.length - 1];
+      setPhoto(photoURL)
 
       const data = await Axios.get("http://localhost:5000/employee/getjobs");
       console.log(data);
@@ -65,7 +71,7 @@ const PostedInternships = () => {
         <Grid item lg={2}>
           <Grid container spacing={3}>
             <Grid item>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+              <Avatar src={photo} alt="Remy Sharp" src={photo} />
             </Grid>
             <Grid item>
               <Typography variant="h6">{companyName}</Typography>

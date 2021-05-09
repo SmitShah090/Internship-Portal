@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth.js");
 const multer = require("multer");
 
+
 // Register of User
  const userRegister = async (req, res) => {
   try {
@@ -152,10 +153,13 @@ const multer = require("multer");
 
 // Update the UserProfile
 
+const userImageUpload = async(req, res) => {
+  res.send(`${req.file.path}`)
+}
+
 const userProfileUpdate = async(req, res) => {
 
   const {profile} = req.body
-   
   try {
     const updatedprofile = await User.findByIdAndUpdate(req.params.id, {
       $set: {
@@ -193,4 +197,4 @@ const userProfileUpdate = async(req, res) => {
     
 }
 
-module.exports = {userRegister, userLogin, userLogout, userLoggedin, userProfileUpdate, userProfile}
+module.exports = {userRegister, userLogin, userLogout, userLoggedin, userProfileUpdate, userImageUpload, userProfile}

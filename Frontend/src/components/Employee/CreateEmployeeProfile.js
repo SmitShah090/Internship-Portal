@@ -24,6 +24,7 @@ const CreateEmployeeProfile = ({history}) => {
   const [companyLocation, setCompanyLocation] = useState("");
   const [companyDescription, setCompanyDescription] = useState("");
   const [companyURL, setCompanyURL] = useState("");
+  const [photo, setPhoto] = useState("")
 
   const [loading, setLoading] = useState(false);
 
@@ -41,6 +42,9 @@ const CreateEmployeeProfile = ({history}) => {
 
      if( CompanyProfile.companyName !== undefined) {
       setCompanyName(CompanyProfile.companyName)
+     } 
+     if( CompanyProfile.photo !== undefined) {
+      setPhoto(CompanyProfile.photo)
      } 
      if( CompanyProfile.companyLocation !== undefined) {
       setCompanyLocation(CompanyProfile.companyLocation)
@@ -69,6 +73,7 @@ const CreateEmployeeProfile = ({history}) => {
           companyName,
           companyLocation,
           companyURL,
+          photo,
           companyDescription,
         },
       };
@@ -81,6 +86,23 @@ const CreateEmployeeProfile = ({history}) => {
       console.log(getData);
     } catch (error) {}
   };
+
+  const uploadImage = async(e) => {
+    e.preventDefault()
+    const file = e.target.files[0]
+    const formData = new FormData();
+    formData.append('image', file);
+
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }
+
+    const { data } = await Axios.post(`http://localhost:5000/employee/upload`, formData, config );
+    console.log(data);
+    setPhoto(data)
+  }
 
   const classes = useStyles();
 
@@ -102,6 +124,7 @@ const CreateEmployeeProfile = ({history}) => {
                   justify="center"
                 >
                   <input
+                    onChange={uploadImage}
                     accept="image/*"
                     className={classes.input}
                     id="contained-button-file"
