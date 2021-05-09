@@ -49,5 +49,5 @@ app.use('/employee', employeeRouter)
 app.use('/uploads', express.static(path.join(__dirname, 'Frontend','public','uploads')))
 
 if(process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"))
+  app.use(express.static("Frontend/build"))
 }
